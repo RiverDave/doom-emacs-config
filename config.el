@@ -4,10 +4,11 @@
 ;; sync' after modifying this file!
 
 
+(menu-bar-mode t)
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-;; (setq user-full-name "John Doe"
-;;       user-mail-address "john@doe.com")
+(setq user-full-name "David Rivera"
+      user-mail-address "davidriverg@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -21,9 +22,9 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
+;; (setq doom-font (font-spec :family "MesloLGL Nerd" :size 18 :weight 'semi-light)
+;;       doom-variable-pitch-font (font-spec :family "MesloLGL Nerd" :size 13))
+
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -48,7 +49,21 @@
   (evil-snipe-mode -1)
   (define-key evil-normal-state-map (kbd "s") 'evil-substitute))
 
-(setq blink-cursor-mode t)
+
+;; Ignore paths by projectile, (FZF)
+(after! projectile
+  (setq projectile-globally-ignored-directories
+        (append '("node_modules"
+                  ".yarn"
+                  ".venv"
+                  ".cask")
+                projectile-globally-ignored-directories)))
+
+
+
+
+
+(setq blink-cursor-mode 10)
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
