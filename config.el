@@ -22,8 +22,9 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;; (setq doom-font (font-spec :family "MesloLGL Nerd" :size 18 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "MesloLGL Nerd" :size 13))
+(setq doom-font (font-spec :family "UbuntuSansMono Nerd Font" :size 18 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "UbuntuSansMono Nerd Font" :size 13))
+
 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -66,9 +67,6 @@
          ((tags "PRIORITY=\"A\""
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                  (org-agenda-overriding-header "High-priority unfinished tasks:")))
-          (tags "PRIORITY=\"B\""
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                 (org-agenda-overriding-header "Medium-priority unfinished tasks:")))
           (tags "PRIORITY=\"C\""
                 ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                  (org-agenda-overriding-header "Low-priority unfinished tasks:")))
@@ -86,6 +84,7 @@
   (define-key evil-normal-state-map (kbd "s") 'evil-substitute))
 
 
+
 ;; Ignore paths by projectile, (FZF)
 (after! projectile
   (setq projectile-globally-ignored-directories
@@ -100,7 +99,6 @@
 
 
 (setq blink-cursor-mode 10)
-
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
