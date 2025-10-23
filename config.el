@@ -4,7 +4,7 @@
 ;; sync' after modifying this file!
 
 
-(menu-bar-mode t)
+;;(menu-bar-mode t)
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "David Rivera"
@@ -22,8 +22,6 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "UbuntuSansMono Nerd Font" :size 18 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "UbuntuSansMono Nerd Font" :size 13))
 
 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -44,11 +42,11 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Org/")
 
-;; (after! org
-;;   (setq org-agenda-files '("~/Org/agenda.org"))
-;;   (setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")))
+(after! org
+  (setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")))
 
 ;;Taken from `DistroTube`
+;;Although I might end up dropping these config as my org uses are quite limited (as of now)
 (after! org
   (setq org-agenda-files '("~/Org/agenda.org")))
 
@@ -78,10 +76,16 @@
           (alltodo "")))))
 
 
+;; Not really utilized on my end
 (use-package! evil-snipe
   :config
-  (evil-snipe-mode -1)
-  (define-key evil-normal-state-map (kbd "s") 'evil-substitute))
+  (evil-snipe-mode -1))
+
+
+
+;; Source PATH to emacs GUI
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 
 
@@ -95,10 +99,31 @@
                 projectile-globally-ignored-directories)))
 
 
+(after! evil
+  (setq evil-insert-state-cursor 'box
+        evil-normal-state-cursor 'box
+        evil-visual-state-cursor 'box
+        evil-replace-state-cursor 'box
+        evil-emacs-state-cursor 'box)
+  (blink-cursor-mode 1))
+
+;; Use SSH as the default TRAMP method
+;; TODO: Tramp seems to be really bad as of now.. Will need to figure it out later.
+(setq tramp-default-method "ssh")
+(setq tramp-verbose 10)
 
 
+;; Latex preview through svg
+(setq org-preview-latex-default-process 'dvisvgm)
 
-(setq blink-cursor-mode 10)
+;; Change latex preview font
+(setq org-format-latex-options '(:foreground nil
+                                 :background nil
+                                 :scale 2.2
+                                 :html-scale 1.6))
+
+;; Auto completion delay
+(setq company-idle-delay nil)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -109,7 +134,7 @@
 ;; The exceptions to this rule:
 ;;
 ;;   - Setting file/directory variables (like `org-directory')
-;;   - Setting variables which explicitly tell you to set them before their
+;;   - Setting variables which explicitly tell you to set tem before their
 ;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
 ;;   - Setting doom variables (which start with 'doom-' or '+').
 ;;
@@ -128,6 +153,7 @@
 ;; This will open documentation for it, including demos of how they are used.
 ;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
 ;; etc).
+;;
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
