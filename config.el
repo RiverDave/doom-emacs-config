@@ -38,6 +38,9 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
+;; Line spacing so it's not so congested.
+(setq-default line-spacing 0.1)
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Org/")
@@ -88,7 +91,6 @@
   (exec-path-from-shell-initialize))
 
 
-
 ;; Ignore paths by projectile, (FZF)
 (after! projectile
   (setq projectile-globally-ignored-directories
@@ -122,8 +124,12 @@
                                  :scale 2.2
                                  :html-scale 1.6))
 
+(after! cc-mode
+  (set-eglot-client! 'cc-mode '("clangd" "-j=3" "--clang-tidy")))
+
+
 ;; Auto completion delay
-(setq company-idle-delay nil)
+;;(setq company-idle-delay nil)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
